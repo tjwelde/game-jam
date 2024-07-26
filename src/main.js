@@ -36,15 +36,17 @@ class Player {
   }
 
   moveRight() {
-    this.velocity.x = 1
+    this.velocity.x = 5
   }
 
   moveLeft() {
-    this.velocity.x = -1
+    this.velocity.x = -5
   }
 
   jump() {
-    this.acc.y = -1
+    if (this.acc.y != 0) return
+    this.velocity.y = -15
+    this.acc.y = 0
   }
 
   stopMoving() {
@@ -56,7 +58,10 @@ class Player {
     this.velocity.y += this.acc.y
     
     if (this.velocity.y < 0) {
-      this.acc.y += 0.1
+      this.acc.y += 0.07
+    }
+    if (this.velocity.y < -15) {
+      this.velocity.y = -5
     }
 
     if (this.acc.y > 1) {
