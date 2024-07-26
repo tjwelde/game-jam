@@ -87,6 +87,7 @@ class Player {
 
     if (Math.abs(this.velocity.x) < MAX_ACC_X) {
       this.velocity.x = 0
+      this.acc.x = 0
     }
 
     this.x += this.velocity.x
