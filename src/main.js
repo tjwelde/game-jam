@@ -5,7 +5,7 @@ const app = new Application()
 
 window.__PIXI_APP__ = app;
 
-await app.init({ width: 800, height: 600 })
+await app.init({ width: 1200, height: 600 })
 
 const MAX_VELOCITY_X = 15
 const MAX_ACC_X = 0.8
