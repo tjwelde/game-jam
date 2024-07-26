@@ -7,6 +7,9 @@ window.__PIXI_APP__ = app;
 
 await app.init({ width: 800, height: 600 })
 
+const MAX_VELOCITY_X = 15
+const MAX_ACC_X = 0.8
+
 const isKeyPressed = {
   ArrowRight: false,
   ArrowLeft: false,
@@ -36,11 +39,11 @@ class Player {
   }
 
   moveRight() {
-    this.velocity.x = 5
+    this.acc.x = MAX_ACC_X
   }
 
   moveLeft() {
-    this.velocity.x = -5
+    this.acc.x = MAX_ACC_X * -1
   }
 
   jump() {
@@ -49,12 +52,8 @@ class Player {
     this.acc.y = 0
   }
 
-  stopMoving() {
-    this.velocity.x = 0
-  }
-
   update() {
-    
+    this.velocity.x += this.acc.x
     this.velocity.y += this.acc.y
     
     if (this.velocity.y < 0) {
@@ -72,6 +71,22 @@ class Player {
       this.y = 0
       this.acc.y = 0
       this.velocity.y = 0
+    }
+
+    if (this.velocity.x > MAX_VELOCITY_X) {
+      this.velocity.x = MAX_VELOCITY_X
+    } else if (this.velocity.x < MAX_VELOCITY_X * -1) {
+      this.velocity.x = MAX_VELOCITY_X * -1
+    }
+
+    if (this.velocity.x > 0) {
+      this.acc.x = MAX_ACC_X * -1
+    } else if (this.velocity.x < 0) {
+      this.acc.x = MAX_ACC_X
+    }
+
+    if (Math.abs(this.velocity.x) < MAX_ACC_X) {
+      this.velocity.x = 0
     }
 
     this.x += this.velocity.x
@@ -112,8 +127,6 @@ app.ticker.add(() => {
     player.moveRight()
   } else if (isKeyPressed.ArrowLeft) {
     player.moveLeft()
-  } else {
-    player.stopMoving()
   }
 
   if (isKeyPressed.ArrowUp) {
