@@ -7,6 +7,13 @@ window.__PIXI_APP__ = app;
 
 await app.init({ width: 800, height: 600 })
 
+const isKeyPressed = {
+  ArrowRight: false,
+  ArrowLeft: false,
+  ArrowUp: false,
+  ArrowDown: false
+}
+
 class Player {
   x = 0
   y = 0
@@ -56,8 +63,8 @@ class Player {
       this.acc.y = 1;
     }
 
-    if (this.y > 400) {
-      this.y = 400
+    if (this.y > 0) {
+      this.y = 0
       this.acc.y = 0
       this.velocity.y = 0
     }
@@ -73,24 +80,41 @@ const player = new Player()
 
 document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight') {
-    player.moveRight()
+    isKeyPressed.ArrowRight = true
   } else if (e.key === 'ArrowLeft') {
-    player.moveLeft()
+    isKeyPressed.ArrowLeft = true
   } else if (e.key === 'ArrowUp') {
-    player.jump()
+    isKeyPressed.ArrowUp = true
   } else if (e.key === 'ArrowDown') {
-    // obj.y += 10
+    isKeyPressed.ArrowDown = true
   }
 }, false)
 
 document.addEventListener('keyup', (e) => {
-  if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-    player.stopMoving()
+  if (e.key === 'ArrowRight') {
+    isKeyPressed.ArrowRight = false
+  } else if (e.key === 'ArrowLeft') {
+    isKeyPressed.ArrowLeft = false
+  } else if (e.key === 'ArrowUp') {
+    isKeyPressed.ArrowUp = false
+  } else if (e.key === 'ArrowDown') {
+    isKeyPressed.ArrowDown = false
   }
 })
 
-
 app.ticker.add(() => {
+  if (isKeyPressed.ArrowRight) {
+    player.moveRight()
+  } else if (isKeyPressed.ArrowLeft) {
+    player.moveLeft()
+  } else {
+    player.stopMoving()
+  }
+
+  if (isKeyPressed.ArrowUp) {
+    player.jump()
+  }
+
   player.update()
 })
 
