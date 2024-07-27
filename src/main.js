@@ -21,7 +21,6 @@ await app.init({ width: 1200, height: 600 });
 const platform1 = new Graphics().rect(100, 550, 1100, 50).fill(0xCBC3E3);
 const platform2 = new Graphics().rect(700, 300, 250, 250).fill(0x800080);
 const platform3 = new Graphics().rect(1000, 450, 100, 100).fill(0xff0000);
-// const platform2 = new Graphics().rect(1000, 450, 100, 100).fill(0xff0000);
 
 app.stage.addChild(platform1);
 app.stage.addChild(platform2);
