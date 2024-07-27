@@ -1,10 +1,17 @@
 import './style.css'
-import { Application, Container, Sprite, Texture, Text, Graphics } from 'pixi.js'
-import { Player } from './player'
+import {
+  Application,
+  Container,
+  Sprite,
+  Texture,
+  Text,
+  Graphics,
+} from 'pixi.js'
+import { Player } from './components/player'
 
 const app = new Application()
 
-window.__PIXI_APP__ = app;
+window.__PIXI_APP__ = app
 
 await app.init({ width: 1200, height: 600 })
 
@@ -12,31 +19,35 @@ const isKeyPressed = {
   ArrowRight: false,
   ArrowLeft: false,
   ArrowUp: false,
-  ArrowDown: false
+  ArrowDown: false,
 }
 
 const player = new Player(app)
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowRight') {
-    isKeyPressed.ArrowRight = true
-  } else if (e.key === 'ArrowLeft') {
-    isKeyPressed.ArrowLeft = true
-  } else if (e.key === 'ArrowUp') {
-    isKeyPressed.ArrowUp = true
-  } else if (e.key === 'ArrowDown') {
-    isKeyPressed.ArrowDown = true
-  }
-}, false)
+document.addEventListener(
+  'keydown',
+  (e) => {
+    if (['ArrowRight', 'd'].includes(e.key)) {
+      isKeyPressed.ArrowRight = true
+    } else if (['ArrowLeft', 'a'].includes(e.key)) {
+      isKeyPressed.ArrowLeft = true
+    } else if (['ArrowUp', 'w'].includes(e.key)) {
+      isKeyPressed.ArrowUp = true
+    } else if (['ArrowDown', 's'].includes(e.key)) {
+      isKeyPressed.ArrowDown = true
+    }
+  },
+  false
+)
 
 document.addEventListener('keyup', (e) => {
-  if (e.key === 'ArrowRight') {
+  if (['ArrowRight', 'd'].includes(e.key)) {
     isKeyPressed.ArrowRight = false
-  } else if (e.key === 'ArrowLeft') {
+  } else if (['ArrowLeft', 'a'].includes(e.key)) {
     isKeyPressed.ArrowLeft = false
-  } else if (e.key === 'ArrowUp') {
+  } else if (['ArrowUp', 'w'].includes(e.key)) {
     isKeyPressed.ArrowUp = false
-  } else if (e.key === 'ArrowDown') {
+  } else if (['ArrowDown', 's'].includes(e.key)) {
     isKeyPressed.ArrowDown = false
   }
 })
