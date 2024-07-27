@@ -1,34 +1,35 @@
-function isOverlappingX(player, platform) {
+function isOverlappingX(playerBounds, platformBounds) {
   return (
-    player.x + player.width > platform.x &&
-    player.x < platform.x + platform.width
+    playerBounds.x + playerBounds.width > platformBounds.x &&
+    playerBounds.x < platformBounds.x + platformBounds.width
   );
 }
 
-function isAbove(player, platform, index) {
-  return player.y + player.height <= platform.y;
+function isAbove(playerBounds, platformBounds) {
+  return playerBounds.y + playerBounds.height / 4 <= platformBounds.y;
 }
 
-export function rectIntersectDown(player, platform, index) {
-  const playerBounds = player.getBounds();
-  const platformBounds = platform.getBounds();
+export function rectIntersectDown(playerBounds, platformBounds) {
   return (
     isOverlappingX(playerBounds, platformBounds) &&
-    isAbove(playerBounds, platformBounds, index)
+    isAbove(playerBounds, platformBounds)
   );
 }
 
 export function detectPlatformGround(player, platforms) {
   let ground;
+  const playerBounds = player.sprite.getBounds();
   for (let i = 0; i < platforms.length; i++) {
     let platform = platforms[i];
     let platformBounds = platform.getBounds();
-    if (rectIntersectDown(player, platform, i)) {
+    if (rectIntersectDown(playerBounds, platformBounds)) {
       if (!ground) {
         ground = platformBounds.minY;
       } else if (ground > platformBounds.minY) {
         ground = platformBounds.minY;
       }
+    } else if (!ground) {
+      ground = 900;
     }
   }
   return ground;

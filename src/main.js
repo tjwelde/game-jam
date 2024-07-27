@@ -18,14 +18,14 @@ window.__PIXI_APP__ = app;
 
 await app.init({ width: 1200, height: 600 });
 
-const platform1 = new Graphics().rect(0, 450, 1200, 50).fill(0xff0000);
-console.log("🚀 ~ platform1:", platform1.getBounds())
-const platform2 = new Graphics().rect(1000, 350, 100, 100).fill(0xff0000);
-console.log("🚀 ~ platform2:", platform2.getBounds())
-
+const platform1 = new Graphics().rect(100, 550, 1100, 50).fill(0xCBC3E3);
+const platform2 = new Graphics().rect(700, 300, 250, 250).fill(0x800080);
+const platform3 = new Graphics().rect(1000, 450, 100, 100).fill(0xff0000);
+// const platform2 = new Graphics().rect(1000, 450, 100, 100).fill(0xff0000);
 
 app.stage.addChild(platform1);
 app.stage.addChild(platform2);
+app.stage.addChild(platform3);
 
 const isKeyPressed = {
   ArrowRight: false,
@@ -74,11 +74,9 @@ app.ticker.add(() => {
   if (isKeyPressed.ArrowUp) {
     player.jump();
   }
-// console.log("🚀 ~ player:", player.sprite.getBounds().y)
-// console.log("🚀 ~ platform2:", platform2.getBounds().y)
 
-  const ground = detectPlatformGround(player.sprite, [platform1, platform2])
-  player.update(ground)
+  const ground = detectPlatformGround(player, [platform1, platform2, platform3]);
+  player.update(ground);
 });
 
 document.querySelector("#app").appendChild(app.canvas);
