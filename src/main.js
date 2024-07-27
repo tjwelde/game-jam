@@ -1,12 +1,5 @@
 import './style.css'
-import {
-  Application,
-  Container,
-  Sprite,
-  Texture,
-  Text,
-  Graphics,
-} from 'pixi.js'
+import { Application } from 'pixi.js'
 import { Player } from './components/player'
 
 const app = new Application()

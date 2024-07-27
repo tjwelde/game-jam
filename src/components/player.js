@@ -1,11 +1,9 @@
-import { Graphics } from 'pixi.js'
+import { Graphics, Sprite, Texture, Point } from 'pixi.js'
 
 const MAX_VELOCITY_X = 15
 const MAX_ACC_X = 0.8
 
 export class Player {
-  x = 0
-  y = 0
   acc = {
     x: 0,
     y: 0,
@@ -17,9 +15,18 @@ export class Player {
   }
 
   constructor(app) {
-    this.sprite = new Graphics().rect(400, 400, 50, 50).fill(0x00ff00)
+    this.sprite = new Sprite({
+      texture: Texture.WHITE,
+    })
+    this.sprite.position.set(400, 400)
 
+    this.sprite.width = 50
+    this.sprite.height = 50
+    this.sprite.tint = 0x00ff00
     app.stage.addChild(this.sprite)
+
+    this.x = this.sprite.x
+    this.y = this.sprite.y
   }
 
   moveRight() {
@@ -51,8 +58,8 @@ export class Player {
       this.acc.y = 1
     }
 
-    if (this.y > 0) {
-      this.y = 0
+    if (this.sprite.y > 0) {
+      this.sprite.y = 0
       this.acc.y = 0
       this.velocity.y = 0
     }
