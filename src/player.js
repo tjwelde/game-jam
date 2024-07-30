@@ -1,4 +1,6 @@
 import { Graphics, Sprite, Texture } from 'pixi.js'
+import { Level } from './level'
+import { detectPlatformGround } from './detectCollision'
 
 const MAX_VELOCITY_X = 12
 const MAX_ACC_X = 1
@@ -18,6 +20,7 @@ export class Player {
     x: 0,
     y: 0,
   }
+  ground = 0
   constructor(app) {
     this.sprite = new Sprite({
       tint: 0x00ff00,
@@ -45,7 +48,7 @@ export class Player {
     this.acc.y = 0
   }
 
-  update(ground) {
+  update() {
     this.velocity.x += this.acc.x
     this.velocity.y += this.acc.y
 
@@ -60,13 +63,13 @@ export class Player {
       this.acc.y = 1
     }
 
-    if (this.y + this.height > ground) {
+    if (this.y + this.height > this.ground) {
       if (this.velocity.y >= 0) {
-        this.y = ground - this.height
+        this.y = this.ground - this.height
         this.acc.y = 0
         this.velocity.y = 0
       }
-    } else if (this.y + this.height < ground) {
+    } else if (this.y + this.height < this.ground) {
       this.acc.y = MAX_ACC_Y
     }
 
@@ -91,5 +94,12 @@ export class Player {
     this.y += this.velocity.y
     this.sprite.x = this.x
     this.sprite.y = this.y
+  }
+
+  /**
+   * @param {Level} level 
+   */
+  handleCollision(level) {
+    this.ground = detectPlatformGround(this, level.platforms)
   }
 }

@@ -2,7 +2,7 @@ import './style.css'
 import { Player } from './player'
 import './style.css'
 import { Application, Graphics } from 'pixi.js'
-import { detectPlatformGround } from './detectCollision'
+import { Level } from './level'
 
 const app = new Application()
 
@@ -10,16 +10,8 @@ window.__PIXI_APP__ = app
 
 await app.init({ width: 1200, height: 600 })
 
-const scene = new Container()
-app.stage.addChild(scene)
-
-const platform1 = new Graphics().rect(100, 550, 1100, 50).fill(0xcbc3e3)
-const platform2 = new Graphics().rect(700, 300, 250, 250).fill(0x800080)
-const platform3 = new Graphics().rect(1000, 450, 100, 100).fill(0xff0000)
-
-scene.addChild(platform1)
-scene.addChild(platform2)
-scene.addChild(platform3)
+const level = new Level()
+app.stage.addChild(level)
 
 const isKeyPressed = {
   ArrowRight: false,
@@ -69,8 +61,8 @@ app.ticker.add(() => {
     player.jump()
   }
 
-  const ground = detectPlatformGround(player, [platform1, platform2, platform3])
-  player.update(ground)
+  player.handleCollision(level)
+  player.update()
 })
 
 document.querySelector('#app').appendChild(app.canvas)
