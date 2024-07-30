@@ -9,12 +9,12 @@ export class Player {
   y = 0
   acc = {
     x: 0,
-    y: 0
+    y: 0,
   }
 
   velocity = {
     x: 0,
-    y: 0
+    y: 0,
   }
   constructor(app) {
     this.sprite = new Graphics().rect(400, 400, 50, 50).fill(0x00ff00)

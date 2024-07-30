@@ -30,14 +30,14 @@ const isKeyPressed = {
   ArrowRight: false,
   ArrowLeft: false,
   ArrowUp: false,
-  ArrowDown: false
+  ArrowDown: false,
 }
 
 const player = new Player(app)
 
 document.addEventListener(
   'keydown',
-  e => {
+  (e) => {
     if (e.key === 'ArrowRight') {
       isKeyPressed.ArrowRight = true
     } else if (e.key === 'ArrowLeft') {
@@ -48,7 +48,7 @@ document.addEventListener(
       isKeyPressed.ArrowDown = true
     }
   },
-  false
+  false,
 )
 
 document.addEventListener('keyup', e => {
