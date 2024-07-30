@@ -1,8 +1,8 @@
 import { Graphics, Sprite, Texture } from 'pixi.js'
 
-const MAX_VELOCITY_X = 15
-const MAX_ACC_X = 0.8
-const MAX_ACC_Y = 0.8
+const MAX_VELOCITY_X = 12
+const MAX_ACC_X = 1
+const MAX_ACC_Y = 0.7
 
 export class Player {
   x = 400
