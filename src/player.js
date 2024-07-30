@@ -21,7 +21,11 @@ export class Player {
     y: 0,
   }
   ground = 0
-  constructor(app) {
+  /**
+   * @type {Level}
+   */
+  level = null
+  constructor(app, level) {
     this.sprite = new Sprite({
       tint: 0x00ff00,
       texture: Texture.WHITE,
@@ -32,6 +36,8 @@ export class Player {
     })
 
     app.stage.addChild(this.sprite)
+
+    this.level = level
   }
 
   moveRight() {
@@ -92,14 +98,12 @@ export class Player {
 
     this.x += this.velocity.x
     this.y += this.velocity.y
-    this.sprite.x = this.x
+    // this.sprite.x = this.x
+    this.level.pivot.x = this.x
     this.sprite.y = this.y
   }
 
-  /**
-   * @param {Level} level 
-   */
-  handleCollision(level) {
-    this.ground = detectPlatformGround(this, level.platforms)
+  handleCollision() {
+    this.ground = detectPlatformGround(this, this.level.platforms)
   }
 }

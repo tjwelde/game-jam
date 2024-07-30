@@ -20,7 +20,7 @@ const isKeyPressed = {
   ArrowDown: false,
 }
 
-const player = new Player(app)
+const player = new Player(app, level)
 
 document.addEventListener(
   'keydown',
@@ -61,7 +61,7 @@ app.ticker.add(() => {
     player.jump()
   }
 
-  player.handleCollision(level)
+  player.handleCollision()
   player.update()
 })
 
