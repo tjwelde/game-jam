@@ -10,7 +10,7 @@ window.__PIXI_APP__ = app
 
 await app.init({ width: 1200, height: 600 })
 
-const level = new Level()
+const level = new Level(app.screen.width)
 app.stage.addChild(level)
 
 const isKeyPressed = {

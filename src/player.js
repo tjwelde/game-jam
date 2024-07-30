@@ -1,4 +1,4 @@
-import { Graphics, Sprite, Texture } from 'pixi.js'
+import { Graphics, Sprite, Texture, Application } from 'pixi.js'
 import { Level } from './level'
 import { detectPlatformGround } from './detectCollision'
 
@@ -7,8 +7,8 @@ const MAX_ACC_X = 1
 const MAX_ACC_Y = 0.7
 
 export class Player {
-  x = 400
-  y = 400
+  x = 0
+  y = 0
   width = 50
   height = 50
   acc = {
@@ -25,7 +25,18 @@ export class Player {
    * @type {Level}
    */
   level = null
+  /**
+   * 
+   * @param {Application} app 
+   * @param {Level} level 
+   */
   constructor(app, level) {
+
+    const { width, height } = app.screen
+
+    this.x = (width / 2) - this.width / 2
+    this.y = height / 2 - this.height / 2
+
     this.sprite = new Sprite({
       tint: 0x00ff00,
       texture: Texture.WHITE,
