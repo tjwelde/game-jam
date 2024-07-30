@@ -1,4 +1,4 @@
-import { Graphics, Sprite, Texture } from 'pixi.js'
+import { Sprite, Texture } from 'pixi.js'
 
 const MAX_VELOCITY_X = 12
 const MAX_ACC_X = 1

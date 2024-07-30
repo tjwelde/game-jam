@@ -1,7 +1,7 @@
 import './style.css'
 import { Player } from './player'
 import './style.css'
-import { Application, Graphics } from 'pixi.js'
+import { Application, Graphics, Container } from 'pixi.js'
 import { detectPlatformGround } from './detectCollision'
 
 const app = new Application()
@@ -40,7 +40,7 @@ document.addEventListener(
     } else if (['ArrowUp', 'w', ' '].includes(e.key)) {
       isKeyPressed.ArrowUp = true
     } else if (['ArrowDown', 's'].includes(e.key)) {
-      isKeyPressed.ArrowDown = trueadsa
+      isKeyPressed.ArrowDown = true
     }
   },
   false,
