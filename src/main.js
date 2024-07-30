@@ -8,7 +8,7 @@ import {
   Texture,
   Text,
   Graphics,
-  Point
+  Point,
 } from 'pixi.js'
 import { detectPlatformGround } from './detectCollision'
 
@@ -51,7 +51,7 @@ document.addEventListener(
   false,
 )
 
-document.addEventListener('keyup', e => {
+document.addEventListener('keyup', (e) => {
   if (e.key === 'ArrowRight') {
     isKeyPressed.ArrowRight = false
   } else if (e.key === 'ArrowLeft') {
