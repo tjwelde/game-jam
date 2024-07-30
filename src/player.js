@@ -8,20 +8,18 @@ export class Player {
   y = 0
   acc = {
     x: 0,
-    y: 0
+    y: 0,
   }
 
   velocity = {
     x: 0,
-    y: 0
+    y: 0,
   }
 
   constructor(app) {
-    this.sprite = new Graphics()
-      .rect(400, 400, 50, 50)
-      .fill(0x00ff00)
+    this.sprite = new Graphics().rect(400, 400, 50, 50).fill(0x00ff00)
 
-      app.stage.addChild(this.sprite)
+    app.stage.addChild(this.sprite)
   }
 
   moveRight() {
@@ -41,7 +39,7 @@ export class Player {
   update() {
     this.velocity.x += this.acc.x
     this.velocity.y += this.acc.y
-    
+
     if (this.velocity.y < 0) {
       this.acc.y += 0.07
     }
@@ -50,7 +48,7 @@ export class Player {
     }
 
     if (this.acc.y > 1) {
-      this.acc.y = 1;
+      this.acc.y = 1
     }
 
     if (this.y > 0) {
