@@ -1,12 +1,14 @@
-import { Graphics } from 'pixi.js'
+import { Graphics, Sprite, Texture } from 'pixi.js'
 
 const MAX_VELOCITY_X = 15
 const MAX_ACC_X = 0.8
 const MAX_ACC_Y = 0.8
 
 export class Player {
-  x = 0
-  y = 0
+  x = 400
+  y = 400
+  width = 50
+  height = 50
   acc = {
     x: 0,
     y: 0,
@@ -17,7 +19,14 @@ export class Player {
     y: 0,
   }
   constructor(app) {
-    this.sprite = new Graphics().rect(400, 400, 50, 50).fill(0x00ff00)
+    this.sprite = new Sprite({
+      tint: 0x00ff00,
+      texture: Texture.WHITE,
+      width: 50,
+      height: 50,
+      x: this.x,
+      y: this.y,
+    })
 
     app.stage.addChild(this.sprite)
   }
@@ -51,13 +60,13 @@ export class Player {
       this.acc.y = 1
     }
 
-    if (this.y > ground - 450) {
+    if (this.y + this.height > ground) {
       if (this.velocity.y >= 0) {
-        this.y = ground - 450
+        this.y = ground - this.height
         this.acc.y = 0
         this.velocity.y = 0
       }
-    } else if (this.y < ground - 450) {
+    } else if (this.y + this.height < ground) {
       this.acc.y = MAX_ACC_Y
     }
 
